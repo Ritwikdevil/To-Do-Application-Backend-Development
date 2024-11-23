@@ -10,6 +10,11 @@ exports.signup = async (req, res) => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   try {
+    // Check for required fields
+    if (!name || !email || !password) {
+      return res.status(400).json({ message: 'Name, email, and password are required' });
+    }
+
     // Check if the email format is valid
     if (!emailRegex.test(email)) {
       return res.status(400).json({ message: 'Invalid email format' });
