@@ -38,10 +38,11 @@ This project is a To-Do Application API built with **Node.js**, **Express.js**, 
    ```bash
    git clone https://github.com/Ritwikdevil/To-Do-Application-Backend-Development.git
 
-   2. Install dependencies::
-   ```bash
-     npm install
-
+3. Create a .env file in the root directory and add the following environment variables:
+```bash
+PORT=5000
+MONGO_URI=your-mongodb-connection-string
+JWT_SECRET=your-secret-key
 
 
 
