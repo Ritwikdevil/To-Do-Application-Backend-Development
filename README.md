@@ -37,4 +37,12 @@ This project is a To-Do Application API built with **Node.js**, **Express.js**, 
 1. Clone the repository:
    ```bash
    git clone https://github.com/Ritwikdevil/To-Do-Application-Backend-Development.git
+
+   2. Install dependencies::
+   ```bash
+     npm install
+
+
+
+
   
