@@ -1,9 +1,12 @@
 const User = require('../models/User');
 
+//view profile 
 exports.getProfile = async (req, res) => {
   res.status(200).json(req.user);
 };
 
+
+//update profile
 exports.updateProfile = async (req, res) => {
   try {
     const updates = req.body;
