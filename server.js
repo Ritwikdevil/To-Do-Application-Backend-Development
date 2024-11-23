@@ -11,6 +11,7 @@ connectDB();
 const app = express();
 app.use(express.json());
 
+//server testing api
 app.get("/test", (req, res) => {
     res.json({
       message: "Hello, this is a test API!",

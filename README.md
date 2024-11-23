@@ -82,8 +82,6 @@ The server will run at http://localhost:5000.
 | GET    | `/api/todos/:id`             | Get a specific to-do item.                        | Yes           |
 | PUT    | `/api/todos/:id`             | Update a to-do item.                              | Yes           |
 | DELETE | `/api/todos/:id`             | Soft delete a to-do item.                         | Yes           |
-| DELETE | `/api/todos/permanent/:id`   | Permanently delete a to-do item.                  | Yes           |
-
 ---
 
 ### **Additional Features**
