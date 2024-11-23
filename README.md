@@ -69,8 +69,8 @@ The server will run at http://localhost:5000.
 ### **User Profile Management**
 | Method | Endpoint           | Description             | Authorization |
 |--------|--------------------|-------------------------|---------------|
-| GET    | `/api/user/profile` | Get user profile.       | Yes           |
-| PUT    | `/api/user/profile` | Update user profile.    | Yes           |
+| GET    | `/api/profile` | Get user profile.       | Yes           |
+| PUT    | `/api/profile` | Update user profile.    | Yes           |
 
 ---
 
