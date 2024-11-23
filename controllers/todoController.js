@@ -5,7 +5,7 @@ exports.createTodo = async (req, res) => {
 
   try {
     // Check for required fields
-    if (!title || !dueDate) {
+    if (!title && !dueDate) {
       return res.status(400).json({ message: 'Title and due date are required' });
     }
 
