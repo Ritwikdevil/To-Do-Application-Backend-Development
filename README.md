@@ -55,6 +55,43 @@ npm start
 The server will run at http://localhost:5000.
 
 
+## **API Endpoints**
+
+### **User Authentication**
+| Method | Endpoint          | Description                 | Authorization |
+|--------|-------------------|-----------------------------|---------------|
+| POST   | `/api/auth/signup` | Create a new user.          | No            |
+| POST   | `/api/auth/login`  | Login and get a token.      | No            |
+| POST   | `/api/auth/logout` | Logout and invalidate token.| Yes           |
+
+---
+
+### **User Profile Management**
+| Method | Endpoint           | Description             | Authorization |
+|--------|--------------------|-------------------------|---------------|
+| GET    | `/api/user/profile` | Get user profile.       | Yes           |
+| PUT    | `/api/user/profile` | Update user profile.    | Yes           |
+
+---
+
+### **To-Do Management**
+| Method | Endpoint                     | Description                                        | Authorization |
+|--------|------------------------------|----------------------------------------------------|---------------|
+| POST   | `/api/todos`                 | Create a new to-do item.                          | Yes           |
+| GET    | `/api/todos`                 | Get all to-dos with filtering, sorting, and pagination.| Yes       |
+| GET    | `/api/todos/:id`             | Get a specific to-do item.                        | Yes           |
+| PUT    | `/api/todos/:id`             | Update a to-do item.                              | Yes           |
+| DELETE | `/api/todos/:id`             | Soft delete a to-do item.                         | Yes           |
+| DELETE | `/api/todos/permanent/:id`   | Permanently delete a to-do item.                  | Yes           |
+
+---
+
+### **Additional Features**
+| Method | Endpoint                   | Description                                  | Authorization |
+|--------|----------------------------|----------------------------------------------|---------------|
+| PUT    | `/api/todos/assign-category/:id` | Assign a category to a to-do item.         | Yes           |
+| GET    | `/api/todos/due-reminders` | Get to-do items nearing their due date.      | Yes           |
+| GET    | `/api/todos/search`        | Search to-dos by title or description.       | Yes           |
 
 
   
