@@ -11,6 +11,14 @@ connectDB();
 const app = express();
 app.use(express.json());
 
+app.get("/test", (req, res) => {
+    res.json({
+      message: "Hello, this is a test API!",
+      success: true,
+      timestamp: new Date().toISOString(),
+    });
+  });
+
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/profile', profileRoutes);
