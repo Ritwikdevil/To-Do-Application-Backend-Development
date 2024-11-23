@@ -93,3 +93,66 @@ exports.deleteTodo = async (req, res) => {
   }
 };
 
+exports.assignCategory = async (req, res) => {
+  const { id } = req.params;
+  const { category } = req.body;
+
+  if (!category) {
+    return res.status(400).json({ message: 'Category is required' });
+  }
+
+  try {
+    const todo = await Todo.findOneAndUpdate(
+      { _id: id, user: req.user._id, isDeleted: false },
+      { category },
+      { new: true }
+    );
+
+    if (!todo) return res.status(404).json({ message: 'To-Do not found' });
+
+    res.status(200).json({ message: 'Category assigned successfully', todo });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.fetchDueReminders = async (req, res) => {
+  const currentDate = new Date();
+  const dueDateThreshold = new Date();
+  dueDateThreshold.setDate(currentDate.getDate() + 3); // Next 3 days
+
+  try {
+    const todos = await Todo.find({
+      user: req.user._id,
+      isDeleted: false,
+      dueDate: { $gte: currentDate, $lte: dueDateThreshold },
+    }).sort('dueDate');
+
+    res.status(200).json({ message: 'Upcoming due tasks', todos });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+exports.searchTodos = async (req, res) => {
+  const { keyword } = req.query;
+
+  if (!keyword) {
+    return res.status(400).json({ message: 'Keyword is required for search' });
+  }
+
+  try {
+    const todos = await Todo.find({
+      user: req.user._id,
+      isDeleted: false,
+      $or: [
+        { title: { $regex: keyword, $options: 'i' } }, // Case-insensitive search in title
+        { description: { $regex: keyword, $options: 'i' } }, // Case-insensitive search in description
+      ],
+    });
+
+    res.status(200).json({ message: 'Search results', todos });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};

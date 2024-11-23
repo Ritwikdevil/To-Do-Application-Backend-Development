@@ -4,16 +4,36 @@ const bcrypt = require('bcrypt');
 
 //signup
 exports.signup = async (req, res) => {
-    const { name, email, password } = req.body;
-    try {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      const user = new User({ name, email, password: hashedPassword });
-      await user.save();
-      res.status(201).json({ message: 'User created successfully' });
-    } catch (err) {
-      res.status(500).json({ message: err.message });
+  const { name, email, password } = req.body;
+
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  try {
+    // Check if the email format is valid
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: 'Invalid email format' });
     }
-  };
+
+    // Check if the email is already registered
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email is already in use' });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user
+    const user = new User({ name, email, password: hashedPassword });
+    await user.save();
+
+    res.status(201).json({ message: 'User created successfully' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
 
   //login
 exports.login = async (req, res) => {
