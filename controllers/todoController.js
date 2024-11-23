@@ -2,7 +2,14 @@ const Todo = require('../models/Todo');
 
 exports.createTodo = async (req, res) => {
   const { title, description, dueDate, priority, category } = req.body;
+
   try {
+    // Check for required fields
+    if (!title || !dueDate) {
+      return res.status(400).json({ message: 'Title and due date are required' });
+    }
+
+    // Create a new todo
     const todo = new Todo({
       title,
       description,
@@ -11,6 +18,8 @@ exports.createTodo = async (req, res) => {
       category,
       user: req.user._id,
     });
+
+    // Save the todo to the database
     await todo.save();
     res.status(201).json(todo);
   } catch (err) {
